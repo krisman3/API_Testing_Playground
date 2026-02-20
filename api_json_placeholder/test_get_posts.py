@@ -1,5 +1,4 @@
-import pytest
-import requests
+import json
 from utils import get_urls
 from utils.json_placeholder_requests import get_request
 POSTS_URL = get_urls.ALL_POSTS
@@ -14,4 +13,8 @@ def test_get_all_posts_status_200():
 
 
 def test_get_posts_from_one_user():
-    pass
+    payload = {"userId": 1}
+    response = get_request(POSTS_URL, params=payload)
+    data = response.json()
+    print(json.dumps(data, indent=4))
+
