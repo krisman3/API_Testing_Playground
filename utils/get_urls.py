@@ -1,4 +1,3 @@
-import json
 from config.env_utils import load_config
 
 BASE_URL = load_config("qa")
