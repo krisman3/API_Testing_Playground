@@ -16,5 +16,4 @@ def test_get_posts_from_one_user():
     payload = {"userId": 1}
     response = get_request(POSTS_URL, params=payload)
     data = response.json()
-    print(json.dumps(data, indent=4))
-
+    assert len(data) == 100         # According to documentation - the number of posts from user 1 are 100
