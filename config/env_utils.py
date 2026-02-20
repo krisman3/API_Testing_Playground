@@ -1,16 +1,13 @@
 import json
 from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+CONFIG_DIR = BASE_DIR/ "config" / "environments"
 
-def get_env_from_json(filename, param:str):
-    path = Path(filename)
 
-    if not path.exists():
-        raise FileNotFoundError(f"{filename} not found")
+def load_config(env: str):
+    config_path = CONFIG_DIR / f"{env}.json"
+    if not config_path.exists():
+        raise FileNotFoundError(f"{config_path} not found.")
 
-    with open(filename, 'r') as file:
-        content = json.load(file)
-
-    if param not in content:
-        raise KeyError(f"{param} not found in config")
-
-    return content[param]
+    with config_path.open('r') as file:
+        return json.load(file)
