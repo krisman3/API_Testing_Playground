@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
-CONFIG_DIR = BASE_DIR/ "config" / "environments"
+CONFIG_DIR = BASE_DIR / "config" / "environments"
 
 
 def load_config(env: str):
