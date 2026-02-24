@@ -23,8 +23,13 @@ def test_get_all_posts_status_200():
 
 @pytest.mark.parametrize("userId,number,status", number_csv_file)
 def test_get_all_posts_from_single_user(userId, number, status):
-    payload = {"userId": userId}
+    payload = {"userId": int(userId)}
     response = get_request(POSTS_URL, params=payload)
+    data = response.json()
+    assert len(data) == int(number)
+    assert response.status_code == int(status)
+
+    # assert len[data] == int(number)
 
 
 
