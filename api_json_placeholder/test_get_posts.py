@@ -29,9 +29,6 @@ def test_get_all_posts_from_single_user(userId, number, status):
     assert len(data) == int(number)
     assert response.status_code == int(status)
 
-    # assert len[data] == int(number)
-
-
 
 @pytest.mark.parametrize("id,body,status", id_csv_file)
 def test_get_post_from_one_user(id, body, status):
