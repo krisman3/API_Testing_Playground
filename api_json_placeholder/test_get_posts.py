@@ -1,5 +1,6 @@
 import pytest
 
+from api_json_placeholder.conftest import get_posts_endpoint
 from utils.json_placeholder_requests import get_request
 from utils.read_csv import csv_reader
 from utils.get_paths import csv_title_file
@@ -19,19 +20,17 @@ def test_get_all_posts_status_200(get_posts_endpoint):
 
 
 @pytest.mark.parametrize("userId,number,status", number_csv_file)
-def test_get_all_posts_from_single_user(userId, number, status):
+def test_get_all_posts_from_single_user(userId, number, status, get_posts_endpoint):
     payload = {"userId": int(userId)}
-    response = get_request(POSTS_URL, params=payload)
-    data = response.json()
+    response, data = get_posts_endpoint(payload)
     assert len(data) == int(number)
     assert response.status_code == int(status)
 
 
 @pytest.mark.parametrize("id,body,status", id_csv_file)
-def test_get_post_from_one_user(id, body, status):
+def test_get_post_from_one_user(id, body, status, get_posts_endpoint):
     payload = {"id": int(id)}
-    response = get_request(POSTS_URL, params=payload)
-    data = response.json()
+    response, data = get_posts_endpoint(payload)
     actual_body = data[0]["body"]
     correct_content = True
     if body not in str(actual_body):
